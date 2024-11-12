@@ -1,16 +1,24 @@
 def chatbot():
-    print("Hello! I am a simple chatbot. Type 'quit' to exit.")
+    # Dictionary to store questions and answers
+    qa_pairs = {
+        "what is your name": "I'm your friendly chatbot!",
+        "how are you": "I'm a computer program, so I don't have feelings, but thanks for asking!",
+        "what can you do": "I can answer some basic questions. Try asking me!",
+        "who created you": "I was created by a curious mind experimenting with Python.",
+        "what is python": "Python is a versatile programming language known for its simplicity and readability."
+    }
+
+    print("Hello! I am a chatbot. Ask me questions, or type 'quit' to exit.")
+    
     while True:
-        user_input = input("You: ")
-        if user_input.lower() == "quit":
+        user_input = input("You: ").lower().strip()
+        if user_input == "quit":
             print("Chatbot: Goodbye!")
             break
-        elif "hello" in user_input.lower():
-            print("Chatbot: Hello! How can I help you today?")
-        elif "how are you" in user_input.lower():
-            print("Chatbot: I'm just a bunch of code, but thanks for asking!")
+        elif user_input in qa_pairs:
+            print(f"Chatbot: {qa_pairs[user_input]}")
         else:
-            print("Chatbot: Sorry, I don't understand.")
+            print("Chatbot: I don't have an answer for that. Try asking something else.")
 
 if __name__ == "__main__":
     chatbot()
