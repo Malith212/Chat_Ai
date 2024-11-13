@@ -1,7 +1,9 @@
 from flask import Flask, request, jsonify, render_template
+from flask_cors import CORS
 import json
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 
 def load_qa_pairs(filename="qa_pairs.json"):
     """Loads questions and answers from a JSON file."""
@@ -15,10 +17,6 @@ def load_qa_pairs(filename="qa_pairs.json"):
 
 qa_pairs = load_qa_pairs()
 
-@app.route("/")
-def index():
-    return render_template("index.html")
-
 @app.route("/ask", methods=["POST"])
 def ask():
     user_question = request.json.get("question", "").lower().strip()
@@ -26,4 +24,4 @@ def ask():
     return jsonify({"answer": answer})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(port=5000, debug=True)
